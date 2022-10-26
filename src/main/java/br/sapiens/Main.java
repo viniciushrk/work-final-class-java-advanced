@@ -12,7 +12,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/layout/main.fxml"));
+        FXMLLoader fxmlLoader =
+                new FXMLLoader(Main.class.getResource("/layout/main.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 500, 500);
         stage.setTitle("Index");
         stage.setScene(scene);
@@ -20,6 +21,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        //minha conecao
         launch();
     }
 
