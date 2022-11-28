@@ -11,12 +11,19 @@ public class Aluno {
     public Date dataNascimento;
     public CursosEnum curso;
 
-    public Aluno(int id, String nome, Date dataNascimento, CursosEnum curso, List<Matricula> matricula) {
+    public Aluno(String nome, Date dataNascimento, CursosEnum curso) {
+        this.nome = nome;
+        this.dataNascimento = dataNascimento;
+        this.curso = curso;
+//        this.matricula = matricula;
+    }
+
+    public Aluno(int id, String nome, Date dataNascimento, CursosEnum curso) {
         this.id = id;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.curso = curso;
-        this.matricula = matricula;
+//        this.matricula = matricula;
     }
 
     private List<Matricula> matricula;
@@ -29,7 +36,7 @@ public class Aluno {
         this.id = id;
     }
 
-    public String getNome() {
+    public final String getNome() {
         return nome;
     }
 
@@ -57,11 +64,11 @@ public class Aluno {
         return new java.sql.Date(dataNascimento.getTime());
     }
 
-    public List<Matricula> getMatricula() {
-        return matricula;
-    }
-
-    public void setMatricula(List<Matricula> matricula) {
-        this.matricula = matricula;
-    }
+//    public List<Matricula> getMatricula() {
+//        return matricula;
+//    }
+//
+//    public void setMatricula(List<Matricula> matricula) {
+//        this.matricula = matricula;
+//    }
 }

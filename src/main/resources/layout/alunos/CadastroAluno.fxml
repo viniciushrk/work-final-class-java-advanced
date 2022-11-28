@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.sapiens.controllers.CadastroAlunoController">
+   <children>
+      <Pane prefHeight="401.0" prefWidth="178.0">
+         <children>
+            <Label layoutX="54.0" layoutY="63.0" text="Nome" />
+            <Label layoutX="54.0" layoutY="113.0" text="Data Nascimento" />
+            <Label layoutX="54.0" layoutY="157.0" text="Curso" />
+         </children>
+      </Pane>
+      <Pane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <TextField fx:id="nome" layoutX="11.0" layoutY="61.0" prefHeight="25.0" prefWidth="178.0" />
+            <DatePicker fx:id="dataNascimento" layoutX="11.0" layoutY="106.0" prefHeight="25.0" prefWidth="178.0" />
+            <Label layoutX="106.0" layoutY="31.0" text="Label" />
+            <ChoiceBox fx:id="cursos" layoutX="11.0" layoutY="151.0" prefHeight="25.0" prefWidth="178.0" />
+
+            <Button layoutX="14.0" layoutY="201.0" onAction="#salvar" prefHeight="25.0" prefWidth="178.0">Salvar</Button>
+         </children>
+      </Pane>
+   </children>
+</FlowPane>

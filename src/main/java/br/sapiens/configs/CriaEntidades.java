@@ -13,26 +13,28 @@ public class CriaEntidades {
         this.connection = connection;
     }
 
-    public void gerarEntidade(String sql) throws SQLException {
+    public void gerarEntidade() throws SQLException
+    {
         Statement statement = connection.createStatement();
 
-        statement.execute(sql);
+        String Disciplina = "Create table disciplinas (" +
+                "id int primary key AUTO_INCREMENT, " +
+                "descricao varchar(200)," +
+                "curso varchar(200)," +
+                "periodo varchar(200)" +
+                ");";
 
-        System.out.println("Tabela criada comsucesso");
+        String Aluno = "Create table alunos (" +
+                "id int primary key AUTO_INCREMENT,"+
+                "matricula varchar(200)," +
+                "nome varchar(200)," +
+                "dataNascimento DATE," +
+                "curso varchar(200)" +
+                ") ;";
+
+        statement.execute(Disciplina);
+        statement.execute(Aluno);
+
+        System.out.println("Tabela criada com sucesso");
     }
-
-    public void inserirDadoNaEntidade(int matricula, String nome) throws SQLException {
-        Object[] params = new Object[]{matricula, nome};
-
-        String sql = "Insert into alunos (matricula, nome) values ("+matricula+", '"+nome+"')";
-        String msg = MessageFormat.format(sql, params);
-        System.out.println(msg);
-
-        Statement statement = connection.createStatement();
-        int rows = statement.executeUpdate(sql);
-        if (rows > 0) {
-            System.out.println("Linha inserida com sucesso.");
-        }
-    }
-
 }

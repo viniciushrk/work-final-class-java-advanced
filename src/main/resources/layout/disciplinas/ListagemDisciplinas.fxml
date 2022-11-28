@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+
+
+<BorderPane fx:controller="br.sapiens.controllers.ListagemAlunoController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <TableView fx:id="table" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <columns>
+<!--          <TableColumn fx:id="columnNome" prefWidth="124.0" text="Nome" />-->
+<!--          <TableColumn fx:id="columnDataNascimento" prefWidth="156.0" text="DataNascimento" />-->
+<!--          <TableColumn fx:id="columnCurso" prefWidth="116.0" text="Curso" />-->
+<!--          <TableColumn prefWidth="116.0" text="Ação" />-->
+        </columns>
+      </TableView>
+   </center>
+</BorderPane>

@@ -4,13 +4,13 @@ import br.sapiens.domain.enums.PeriodosEnum;
 
 public class Matricula {
 
-    public int alunoId;
+    private int alunoId;
 
-    public int disciplonaId;
+    private int disciplonaId;
 
-    public Disciplina Disciplina;
+    private PeriodosEnum periodos;
 
-    public Aluno curso;
+    private Disciplina Disciplina;
 
-    public PeriodosEnum periodos;
+    private Aluno curso;
 }

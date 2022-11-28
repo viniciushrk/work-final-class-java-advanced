@@ -2,6 +2,7 @@ package br.sapiens.daos;
 
 import br.sapiens.configs.ConexaoSingleton;
 import br.sapiens.domain.enums.CursosEnum;
+import br.sapiens.domain.enums.PeriodosEnum;
 import br.sapiens.domain.models.Aluno;
 import br.sapiens.domain.models.Disciplina;
 import br.sapiens.domain.models.Matricula;
@@ -24,28 +25,30 @@ public class DisciplinaDao implements CrudRepository<Disciplina, Integer>  {
     @Override
     public <S extends Disciplina> S save(S entity) throws SQLException
     {
-        if(entity.getDescricao() == null)
+        if(entity.getId() == 0)
             return insertInto(entity);
         else
             return update(entity);
     }
 
     private <S extends Disciplina> S update(S entity) throws SQLException {
-        String sql = "UPDATE disciplina SET descricao = ?, curso = ? WHERE id = ?";
+        String sql = "UPDATE disciplina SET descricao = ?, curso = ?, periodo = ? WHERE id = ?";
         PreparedStatement pstmt = conn.prepareStatement(sql);
         pstmt.setInt(1,entity.getId());
         pstmt.setString(2,entity.getDescricao());
+        pstmt.setString(3, entity.getCurso().toString());
         pstmt.setString(3, entity.getCurso().toString());
         pstmt.executeUpdate();
         return entity;
     }
 
     private <S extends Disciplina> S insertInto(S entity) throws SQLException {
-        String sql = "Insert into disciplina (descricao, curso) values(?, ?)";
+        String sql = "Insert into disciplinas (descricao, curso, periodo) values(?, ?, ?)";
         PreparedStatement pstmt = conn.prepareStatement(sql,
                 Statement.RETURN_GENERATED_KEYS);
         pstmt.setString(1, entity.getDescricao());
         pstmt.setString(2, entity.getCurso().toString());
+        pstmt.setString(3, entity.getPeriodos().toString());
         int affectedRows = pstmt.executeUpdate();
         if (affectedRows == 0)
             throw new SQLException("Falha, nenhuma linha foi inserida");
@@ -85,7 +88,7 @@ public class DisciplinaDao implements CrudRepository<Disciplina, Integer>  {
                 .map(x -> String.valueOf(x))
                 .collect(Collectors.joining(",", "(", ")"));
 
-        String sql = "select * from aluno where id in(?)".replace("(?)", sqlIN);
+        String sql = "select * from disciplinas where id in(?)".replace("(?)", sqlIN);
         PreparedStatement stmt = conn.prepareStatement(sql);
         List<Disciplina> resultado = new ArrayList();
 
@@ -95,7 +98,8 @@ public class DisciplinaDao implements CrudRepository<Disciplina, Integer>  {
                 var disciplina = new Disciplina (
                         rs.getInt(1),
                         rs.getString(2),
-                        CursosEnum.valueOf(rs.getString(3))
+                        CursosEnum.valueOf(rs.getString(3)),
+                        PeriodosEnum.valueOf(rs.getString(4))
                 );
 
                 resultado.add(disciplina);
