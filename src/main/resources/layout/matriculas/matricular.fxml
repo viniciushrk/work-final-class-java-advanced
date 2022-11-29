@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<?import javafx.scene.control.ComboBox?>
+<FlowPane fx:controller="br.sapiens.controllers.MatricularController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane prefHeight="398.0" prefWidth="197.0" />
+      <Pane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Label layoutX="26.0" layoutY="14.0" text="Matricular">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Label>
+            <Label layoutX="26.0" layoutY="72.0" text="Alunos">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <ChoiceBox fx:id="alunos" layoutX="25.0" layoutY="97.0" prefWidth="150.0">
+
+            </ChoiceBox>
+
+            <Label layoutX="26.0" layoutY="134.0" text="Disciplina">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <ChoiceBox fx:id="disciplinas" layoutX="25.0" layoutY="158.0" prefWidth="150.0" />
+
+            <Label layoutX="26.0" layoutY="191.0" text="Periodo">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <ChoiceBox fx:id="periodo" layoutX="25.0" layoutY="211.0" prefWidth="150.0" />
+
+            <Button layoutX="25.0" layoutY="270.0" mnemonicParsing="false" onAction="#salvar" prefHeight="32.0" prefWidth="150.0" style="-fx-background-color: #3CED84;" text="Salvar" />
+         </children>
+      </Pane>
+      <Pane prefHeight="200.0" prefWidth="200.0" />
+   </children>
+</FlowPane>
