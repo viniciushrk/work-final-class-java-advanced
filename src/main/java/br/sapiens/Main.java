@@ -5,8 +5,11 @@ import br.sapiens.configs.ConexaoSingleton;
 import br.sapiens.configs.CriaEntidades;
 import br.sapiens.daos.AlunoDao;
 import br.sapiens.daos.CrudRepository;
+import br.sapiens.daos.DisciplinaDao;
 import br.sapiens.domain.enums.CursosEnum;
+import br.sapiens.domain.enums.PeriodosEnum;
 import br.sapiens.domain.models.Aluno;
+import br.sapiens.domain.models.Disciplina;
 import br.sapiens.domain.utils.DataParse;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -45,12 +48,19 @@ public class Main extends Application {
 
         entidade.gerarEntidade();
         var aluno = new Aluno(
-                "viniciusa",
+                "vinicius",
                 new Date(),
                 CursosEnum.ENGENHARIA
         );
 
+        var disciplina = new Disciplina(
+          "POO",
+                CursosEnum.SISTEMAS,
+                PeriodosEnum.PRIMEIRO
+        );
+
         Aluno alunoSalvo = new AlunoDao().save(aluno);
+        Disciplina disciplinaSalva = new DisciplinaDao().save(disciplina);
         //minha conecao
         launch();
     }

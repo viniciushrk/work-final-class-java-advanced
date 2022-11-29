@@ -109,6 +109,28 @@ public class DisciplinaDao implements CrudRepository<Disciplina, Integer>  {
         return resultado;
     }
 
+    public List<Disciplina> findAll() throws SQLException {
+        String sql = "select * from disciplinas";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        List<Disciplina> resultado = new ArrayList();
+
+        try (ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                int disciplinaId = rs.getInt(1);
+                var disciplina = new Disciplina (
+                        disciplinaId,
+                        rs.getString(2),
+                        CursosEnum.valueOf(rs.getString(3)),
+                        PeriodosEnum.valueOf(rs.getString(4))
+                );
+
+                resultado.add(disciplina);
+            }
+        }
+
+        return resultado;
+    }
+
     @Override
     public void delete(Disciplina entity) {
 

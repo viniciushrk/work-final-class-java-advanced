@@ -24,6 +24,16 @@ public class CriaEntidades {
                 "periodo varchar(200)" +
                 ");";
 
+        String Matricula = "" +
+                "CREATE TABLE `matriculas` (" +
+                "  `id` int primary key AUTO_INCREMENT," +
+                "  `disciplinaId` int," +
+                "  `alunoId` int," +
+                "  `periodo` varchar(200)," +
+                "  FOREIGN KEY (`alunoId`) REFERENCES alunos(`id`)," +
+                "  FOREIGN KEY (`disciplinaId`) REFERENCES disciplinas(`id`)" +
+                ");\n";
+
         String Aluno = "Create table alunos (" +
                 "id int primary key AUTO_INCREMENT,"+
                 "matricula varchar(200)," +
@@ -34,6 +44,7 @@ public class CriaEntidades {
 
         statement.execute(Disciplina);
         statement.execute(Aluno);
+        statement.execute(Matricula);
 
         System.out.println("Tabela criada com sucesso");
     }

@@ -61,7 +61,11 @@
             <Menu mnemonicParsing="false" text="Disciplinas">
               <items>
                 <MenuItem onAction="#cadastrarDisciplina" mnemonicParsing="false" text="Cadastrar" />
-                <MenuItem onAction="#listagemDisciplinas" mnemonicParsing="false" text="Cadastrar" />
+                <MenuItem onAction="#listagemDisciplinas" mnemonicParsing="false" text="Listagem" />
+              </items>
+            </Menu><Menu mnemonicParsing="false" text="Matriculas">
+              <items>
+                <MenuItem onAction="#listagemMatricula" mnemonicParsing="false" text="Listagem" />
               </items>
             </Menu>
           </menus>

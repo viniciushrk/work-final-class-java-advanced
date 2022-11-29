@@ -14,4 +14,7 @@ module br.sapiens {
 
     opens br.sapiens.domain.models to javafx.controls;
     exports br.sapiens.domain.models;
+
+    opens br.sapiens.domain.dtos to javafx.controls;
+    exports br.sapiens.domain.dtos;
 }

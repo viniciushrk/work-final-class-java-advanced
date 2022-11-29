@@ -36,4 +36,9 @@ public class MainController {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/layout/disciplinas/CadastroDisciplina.fxml"));
         painel.setCenter(fxmlLoader.load());
     }
+
+    public void listagemMatricula() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/layout/matriculas/ListagemMatriculas.fxml"));
+        painel.setCenter(fxmlLoader.load());
+    }
 }

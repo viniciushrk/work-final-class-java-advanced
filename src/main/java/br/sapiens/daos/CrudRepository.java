@@ -1,5 +1,7 @@
 package br.sapiens.daos;
 
+import br.sapiens.domain.models.Matricula;
+
 import java.sql.SQLException;
 import java.util.Optional;
 

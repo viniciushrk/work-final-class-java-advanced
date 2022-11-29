@@ -97,7 +97,7 @@ public class AlunoDao implements CrudRepository<Aluno,Integer> {
         try (ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 int alunoId = rs.getInt(1);
-                List<Matricula> matriculas = new MatriculaDao().findAllByAlunoId(alunoId);
+
 
                 var nome = rs.getString(3);
                 var curso = rs.getString(5);
@@ -128,10 +128,7 @@ public class AlunoDao implements CrudRepository<Aluno,Integer> {
         try (ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 int alunoId = rs.getInt(1);
-                List<Matricula> matriculas = new MatriculaDao().findAllByAlunoId(alunoId);
-
                 var nome = rs.getString(3);
-                var curso = rs.getString(5);
                 var date =  rs.getDate(4);
 
                 var aluno = new Aluno (
