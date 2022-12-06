@@ -15,9 +15,9 @@ public interface CrudRepository<T,ID> {
 
     Iterable<T> findAllById(Iterable<ID> ids) throws SQLException;
 
-    void delete(T entity);
+    void delete(T entity) throws SQLException;
 
-    void deleteById(ID id);
+    void deleteById(ID id) throws SQLException;
 
-    void deleteAll(Iterable<? extends T> entities);
+    void deleteAll(Iterable<? extends T> entities) throws SQLException;
 }

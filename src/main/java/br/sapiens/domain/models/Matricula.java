@@ -23,6 +23,15 @@ public class Matricula {
         this.periodo = periodo;
     }
 
+    public Matricula (int id, int alunoId, int disciplinaId, PeriodosEnum periodo)
+    {
+        this.id = id;
+        this.alunoId = alunoId;
+        this.disciplinaId = disciplinaId;
+        this.periodo = periodo;
+    }
+
+
     public int getAlunoId() {
         return alunoId;
     }

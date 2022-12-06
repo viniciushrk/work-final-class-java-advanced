@@ -145,17 +145,37 @@ public class AlunoDao implements CrudRepository<Aluno,Integer> {
     }
 
     @Override
-    public void delete(Aluno entity) {
+    public void delete(Aluno aluno) throws SQLException {
+        String sql = "DELETE FROM alunos WHERE id = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setInt(1 , aluno.id);
+        int affectedRows = stmt.executeUpdate();
 
+        if (affectedRows == 0)
+            throw new SQLException("Falha, nenhuma linha foi deletada.");
     }
 
     @Override
-    public void deleteById(Integer integer) {
+    public void deleteById(Integer id) throws SQLException {
+        String sql = "DELETE FROM alunos WHERE id = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setInt(1 , id);
+        int affectedRows = stmt.executeUpdate();
 
+        if (affectedRows == 0)
+            throw new SQLException("Falha, nenhuma linha foi deletada.");
     }
 
     @Override
-    public void deleteAll(Iterable<? extends Aluno> entities) {
+    public void deleteAll(Iterable<? extends Aluno> entities) throws SQLException {
+        for(var aluno: entities){
+            String sql = "DELETE FROM alunos WHERE id = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1 , aluno.id);
+            int affectedRows = stmt.executeUpdate();
 
+            if (affectedRows == 0)
+                throw new SQLException("Falha, nenhuma linha foi deletada.");
+        }
     }
 }

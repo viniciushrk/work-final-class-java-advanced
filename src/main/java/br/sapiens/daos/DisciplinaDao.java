@@ -132,17 +132,37 @@ public class DisciplinaDao implements CrudRepository<Disciplina, Integer>  {
     }
 
     @Override
-    public void delete(Disciplina entity) {
+    public void delete(Disciplina disciplina) throws SQLException {
+        String sql = "DELETE FROM disciplinas WHERE id = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setInt(1 , disciplina.id);
+        int affectedRows = stmt.executeUpdate();
 
+        if (affectedRows == 0)
+            throw new SQLException("Falha, nenhuma linha foi deletada.");
     }
 
     @Override
-    public void deleteById(Integer integer) {
+    public void deleteById(Integer id) throws SQLException {
+        String sql = "DELETE FROM disciplinas WHERE id = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setInt(1 , id);
+        int affectedRows = stmt.executeUpdate();
 
+        if (affectedRows == 0)
+            throw new SQLException("Falha, nenhuma linha foi deletada.");
     }
 
     @Override
-    public void deleteAll(Iterable<? extends Disciplina> entities) {
+    public void deleteAll(Iterable<? extends Disciplina> disciplinas) throws SQLException {
+        for(var disciplina: disciplinas){
+            String sql = "DELETE FROM disciplinas WHERE id = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1 , disciplina.id);
+            int affectedRows = stmt.executeUpdate();
 
+            if (affectedRows == 0)
+                throw new SQLException("Falha, nenhuma linha foi deletada.");
+        }
     }
 }

@@ -19,6 +19,4 @@ public class ConexaoSingleton {
     public Connection getConnection() {
         return conn;
     }
-
-
 }
