@@ -55,18 +55,38 @@ public class MatriculaDao implements CrudRepository<Matricula, Integer>{
     }
 
     @Override
-    public void delete(Matricula entity) {
+    public void delete(Matricula matricula) throws SQLException {
+        String sql = "DELETE FROM matriculas WHERE id = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setInt(1 , matricula.getId());
+        int affectedRows = stmt.executeUpdate();
 
+        if (affectedRows == 0)
+            throw new SQLException("Falha, nenhuma linha foi deletada.");
     }
 
     @Override
-    public void deleteById(Integer integer) {
+    public void deleteById(Integer id) throws SQLException {
+        String sql = "DELETE FROM matriculas WHERE id = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setInt(1 , id);
+        int affectedRows = stmt.executeUpdate();
 
+        if (affectedRows == 0)
+            throw new SQLException("Falha, nenhuma linha foi deletada.");
     }
 
     @Override
-    public void deleteAll(Iterable<? extends Matricula> entities) {
+    public void deleteAll(Iterable<? extends Matricula> matriculas) throws SQLException {
+        for (var matricula: matriculas) {
+            String sql = "DELETE FROM matriculas WHERE id = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1 , matricula.getId());
+            int affectedRows = stmt.executeUpdate();
 
+            if (affectedRows == 0)
+                throw new SQLException("Falha, nenhuma linha foi deletada.");
+        }
     }
 
     @Override
