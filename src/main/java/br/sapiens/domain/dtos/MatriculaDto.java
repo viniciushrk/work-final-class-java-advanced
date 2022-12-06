@@ -5,6 +5,7 @@ import br.sapiens.domain.models.Aluno;
 import br.sapiens.domain.models.Disciplina;
 
 public class MatriculaDto {
+    private int id;
     private int alunoId;
 
     private int disciplinaId;
@@ -15,7 +16,8 @@ public class MatriculaDto {
 
     private String descricaoDisciplina;
 
-    public MatriculaDto(int alunoId, int disciplinaId, PeriodosEnum periodo, String nomeAluno, String descricaoDisciplina) {
+    public MatriculaDto(int id, int alunoId, int disciplinaId, PeriodosEnum periodo, String nomeAluno, String descricaoDisciplina) {
+        this.id = id;
         this.alunoId = alunoId;
         this.disciplinaId = disciplinaId;
         this.periodo = periodo;
@@ -23,6 +25,13 @@ public class MatriculaDto {
         this.descricaoDisciplina = descricaoDisciplina;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     public int getAlunoId() {
         return alunoId;
     }

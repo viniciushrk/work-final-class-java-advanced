@@ -3,33 +3,24 @@ package br.sapiens.controllers;
 import br.sapiens.daos.AlunoDao;
 import br.sapiens.daos.DisciplinaDao;
 import br.sapiens.daos.MatriculaDao;
-import br.sapiens.domain.enums.CursosEnum;
 import br.sapiens.domain.enums.PeriodosEnum;
-import br.sapiens.domain.models.Aluno;
-import br.sapiens.domain.models.Disciplina;
-import br.sapiens.domain.models.Matricula;
-import br.sapiens.domain.utils.DataParse;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.input.InputEvent;
-import javafx.scene.layout.FlowPane;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class MatricularController {
+public class DeletarAlunoController {
+
     @FXML
     ChoiceBox<String> alunos;
-    
+
     @FXML
     ChoiceBox<String> disciplinas;
-    
+
     @FXML
     ChoiceBox<PeriodosEnum> periodo;
 
@@ -38,7 +29,7 @@ public class MatricularController {
 
     MatriculaDao matriculaDao = new MatriculaDao();
 
-    public MatricularController() throws SQLException {
+    public DeletarAlunoController() throws SQLException {
     }
 
     @FXML
@@ -82,25 +73,20 @@ public class MatricularController {
         return guestsList;
     }
 
-    public void salvar(InputEvent e) throws SQLException {
-        var alunoSelecionado = alunos.getValue();
-        var disciplinasSelecionado = disciplinas.getValue();
+    public void salvar() throws SQLException {
+        try {
+            var alunosSelecionado = alunos.getValue();
 
-        var alunoSelecionadoSplit = alunoSelecionado.split(" - ");
-        var disciplinasSelecionadoSplit = disciplinasSelecionado.split(" - ");
+            var alunoSelecionadoSplit = alunosSelecionado.split(" - ");
 
-        int alunoId = Integer.parseInt(alunoSelecionadoSplit[1]);
-        int disciplinaId = Integer.parseInt(disciplinasSelecionadoSplit[1]);
+            int alunoId = Integer.parseInt(alunoSelecionadoSplit[1]);
 
-        var matricula = new Matricula(
-                alunoId,
-                disciplinaId,
-                (PeriodosEnum) periodo.getValue()
-        );
+            alunoDao.deleteById(alunoId);
 
-        Matricula matriculaSalva = matriculaDao.save(matricula);
-
-        System.out.println("Matricula realizada com sucesso.");
-        new Alert(Alert.AlertType.CONFIRMATION, "Matricula realizada com sucesso.").show();
+            System.out.println("Deletado com sucesso.");
+            new Alert(Alert.AlertType.CONFIRMATION, "Deletado  com sucesso.").show();
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "Não foi possivel deletar, talvez esse aluno esteja vinculada a uma disciplina.").show();
+        }
     }
 }
