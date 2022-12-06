@@ -9,8 +9,10 @@ import br.sapiens.domain.models.Matricula;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class MatriculaDao implements CrudRepository<Matricula, Integer>{
 
@@ -50,8 +52,13 @@ public class MatriculaDao implements CrudRepository<Matricula, Integer>{
     }
 
     @Override
-    public Optional findById(Integer o) throws SQLException {
-        return Optional.empty();
+    public Optional<Matricula> findById(Integer id) throws SQLException {
+        List<Matricula> resultados = findAllById(List.of(id));
+
+        if(resultados == null || resultados.size() != 1) {
+            throw new SQLException("Erro ao buscar valores, não existe somente um resultado! Size " + resultados.size());
+        }
+        return Optional.ofNullable(resultados.get(0));
     }
 
     @Override
@@ -90,8 +97,47 @@ public class MatriculaDao implements CrudRepository<Matricula, Integer>{
     }
 
     @Override
-    public Iterable findAllById(Iterable iterable) throws SQLException {
-        return null;
+    public List<Matricula> findAllById(Iterable<Integer> ids) throws SQLException {
+        List<Integer> lista = new ArrayList();
+        Iterator<Integer> interetor = ids.iterator();
+
+        while(interetor.hasNext()){
+            lista.add(interetor.next());
+        }
+
+        String sqlIN = lista.stream()
+                .map(x -> String.valueOf(x))
+                .collect(Collectors.joining(",", "(", ")"));
+        String sql = "select * from matriculas where id in(?)".replace("(?)", sqlIN);
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        List<Matricula> resultado = new ArrayList();
+        try (ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                int matriculaId = rs.getInt(1);
+                var alunoId = rs.getInt(2);
+                var disciplinaId = rs.getInt(3);
+                var periodoEnum =  rs.getString(4);
+
+                var matricula = new Matricula (
+                        matriculaId,
+                        alunoId,
+                        disciplinaId,
+                        PeriodosEnum.valueOf(periodoEnum != null ? periodoEnum : PeriodosEnum.PRIMEIRO.toString())
+                );
+                Optional<Aluno> alunoDao = new AlunoDao().findById(alunoId);
+                Optional<Disciplina> disciplinaDao = new DisciplinaDao().findById(disciplinaId);
+                if (disciplinaDao.isPresent()) {
+                    matricula.setAluno(alunoDao.get());
+                }
+
+                if (disciplinaDao.isPresent()) {
+                    matricula.setDisciplina(disciplinaDao.get());
+                }
+
+                resultado.add(matricula);
+            }
+        }
+        return resultado;
     }
 
     public List<Matricula> findAll() throws SQLException {

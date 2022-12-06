@@ -67,4 +67,16 @@ public class ListagemDisciplinaController
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.showAndWait();
     }
+
+    public void deletarAlunoDisciplina() throws IOException {
+        Stage dialog = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/layout/disciplinas/DeletarDisciplina.fxml"));
+        Button button = new Button("Ok");
+        VBox rootPane = new VBox(10, button);
+        Parent pane = loader.load();
+        Scene newDialogScene = new Scene(pane);
+        dialog.setScene(newDialogScene);
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        dialog.showAndWait();
+    }
 }
