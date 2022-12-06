@@ -155,6 +155,7 @@ public class MatriculaDao implements CrudRepository<Matricula, Integer>{
                 var periodo = rs.getString(4);
 
                 var matricula = new Matricula (
+                        rs.getInt(1),
                         alunoId,
                         disciplinaId,
                         PeriodosEnum.valueOf(periodo)

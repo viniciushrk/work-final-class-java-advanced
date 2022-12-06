@@ -18,6 +18,7 @@
         <FlowPane  prefHeight="48.0" prefWidth="600.0" BorderPane.alignment="CENTER">
             <children>
                 <Button mnemonicParsing="false" onAction="#vincularAlunoDisciplina" text="Vincular aluno" />
+
             </children>
         </FlowPane>
     </top>
